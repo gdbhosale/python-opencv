@@ -1,0 +1,669 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+
+	<title>Applications of Python</title>
+
+	<meta name="description" content="Introduction to Python Programming language for basic users having little knowledge of programming.">
+	<meta name="author" content="Dwij IT Solutions / Ganesh Bhosale">
+	
+	<meta property="og:url"           content="" />
+    <meta property="og:type"          content="website" />
+    <meta property="og:title"         content="Applications of Python" />
+    <meta property="og:description"   content="Introduction to Python Programming language for basic users having little knowledge of programming." />
+    <meta property="og:image"         content="" />
+
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+	<!-- help : http://lab.hakim.se/reveal-js -->
+	<link rel="stylesheet" href="css/reveal.css">
+	<link rel="stylesheet" href="css/theme/black.css" id="theme">
+	
+	<link rel="stylesheet" href="css/font-awesome.min.css">
+
+	<!-- Code syntax highlighting -->
+	<link rel="stylesheet" href="lib/css/zenburn.css">
+
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement( 'link' );
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+		document.getElementsByTagName( 'head' )[0].appendChild( link );
+	</script>
+
+	<!--[if lt IE 9]>
+	<script src="lib/js/html5shiv.js"></script>
+	<![endif]-->
+</head>
+
+<body>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=1684314365174532";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+	<div class="reveal">
+
+		<!-- Any section element inside of this container is displayed as a slide -->
+		<div class="slides" id="slidesD">
+			<section>
+				<h1>Python</h1>
+				<h3>Applications & Libraries</h3>
+				<p>
+					<small>Created by <a target="_blank" href="https://twitter.com/gdbhosale">Ganesh Bhosale</a> in <a target="_blank" href="http://dwijitsolutions.com">Dwij IT Solutions</a></small><br>
+					<a href="http://dwijitsolutions.com" target="_blank">
+						<img src="images/dwij-it-solutions.png" alt="Dwij IT Solutions Logo">
+					</a>
+				</p>
+			</section>
+			
+			<section>
+				<h2>Your support</h2>
+				<p>
+					Like this <a class="cred">Python</a> tutorial, our tutorials are always open-source for learners. Like our facebook page to get more free tutorial updates.
+				</p>
+				<p>
+					<div class="fb-page" data-href="https://www.facebook.com/dwijitsolutions" data-width="330" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/dwijitsolutions"><a href="https://www.facebook.com/dwijitsolutions">Dwij IT Solutions</a></blockquote></div></div>
+					<br><br><br>
+				</p>
+			</section>
+			
+			<section>
+				<h2>Python & Internet</h2>
+				<ul class="left-align">
+					<li>Use of HTTP (Hypertext Transfer Protocol)</li>
+					<li>We need python-requests library. Lets install.</li>
+					<li><pre><code>sudo apt-get install python-requests</code></pre></li>
+					<li>Now open interpreter and import this library</li>
+				</ul>
+				<pre><code data-trim class="python">
+>>> import requests as req
+>>> r = req.get("http://google.com")
+>>> r.status_code
+200
+>>> r.text 	# Print data fetched from site
+				</code></pre>
+			</section>
+			
+			<section>
+				<h2>Request Status Codes</h2>
+				<table>
+					<tr><th>Code</th><th>Meaning</th></tr>
+					<tr><td>200</td><td>OK</td></tr>
+					<tr><td>301</td><td>Moved Permanently</td></tr>
+					<tr><td>307</td><td>Moved Temporary</td></tr>
+					<tr><td>401</td><td>Unauthorized</td></tr>
+					<tr><td>404</td><td>Not Found</td></tr>
+					<tr><td>500</td><td>Server Error</td></tr>
+				</table>
+			</section>
+			
+			<section>
+				<h2>Weather Data Access</h2>
+				<ul class="left-align">
+					<li>We can use <a href="http://openweathermap.org/current">http://openweathermap.org/current</a></li>
+					<li>We need web service link:</li>
+					<li><pre><code>http://api.openweathermap.org/data/2.5/weather?q=Pune&appid=44db6a862fba0b067b1930da0d769e98</code></pre></li>
+					<li>This will give information in JSON (JavaScript Object Notation) Format like below:</li>
+				</ul>
+				<pre><code data-trim class="overflow java">
+{"coord":{"lon":73.86,"lat":18.52},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":291.988,"pressure":950.59,"humidity":52,"temp_min":291.988,"temp_max":291.988,"sea_level":1025.4,"grnd_level":950.59},"wind":{"speed":2.31,"deg":279.501},"clouds":{"all":0},"dt":1457198019,"sys":{"message":0.0101,"country":"IN","sunrise":1457140797,"sunset":1457183515},"id":1259229,"name":"Pune","cod":200}
+				</code></pre>
+			</section>
+			
+			<section>
+				<h2>Program</h2>
+				<ul class="left-align">
+					<li>Temperature in Kelvin; C = K – 273.15 </li>
+				</ul>
+				<pre><code data-trim class="python">
+>>> import requests as rq
+>>> r = rq.get("http://api.----/weather?q=Pune&appid=1111")
+>>> info = r.json
+>>> print info['main']['temp']
+294.14
+>>>
+				</code></pre>
+				<ul class="left-align">
+					<li>Use this site to understand the json: <a href="http://json.parser.online.fr">http://json.parser.online.fr</a></li>
+				</ul>
+			</section>
+
+			<section data-background="#F56767" data-background-transition="zoom" data-transition="zoom">
+				<h2>TKinter (User Interfaces)</h2>
+				<img src="images/tkinter-window.png" height="300">
+			</section>
+			
+			<section>
+				<h2>TKinter</h2>
+				<ul class="left-align">
+					<li>Only works in LXDE Graphics Environment</li>
+					<li>Its in-built in Ubuntu, Rasbian & Mac</li>
+					<li>More information about TKinter on <a href="https://wiki.python.org/moin/TkInter">https://wiki.python.org/moin/TkInter</a></li>
+				</ul>
+			</section>
+			
+			<section>
+				<h2>Key & mouse events</h2>
+				<img class="nostyle" src="images/tkinter-keyboard-mouse-click-detection.png" height="300">
+			</section>
+			
+			<section>
+				<p>Key & mouse events</p>
+				<pre class="fullw fullh"><code data-trim class="python">
+from Tkinter import *
+root = Tk()
+
+def key(event):
+    print "pressed", repr(event.char), " keysym", event.keysym
+
+def callback(event):
+    frame.focus_set()
+    print "clicked at", event.x, event.y
+
+frame = Frame(root, width=100, height=100)
+frame.bind("&lt;Key&gt;", key)		# bind event for key -> key()
+frame.bind("&lt;Button-1&gt;", callback)	# bind event for mouse -> callback()
+frame.pack()
+root.mainloop()
+				</code></pre>
+			</section>
+			
+			<section>
+				<h2>Button & Its Events</h2>
+				<img class="nostyle" src="images/tkinter-button-event.png" height="300">
+			</section>
+			
+			<section>
+				<p>Button & Its Events</p>
+				<pre class="fullw"><code data-trim class="python">
+from Tkinter import *
+
+def Call():
+        lab= Label(root, text = 'You pressed\nthe button')
+        lab.pack()
+        button['bg'] = 'blue'
+        button['fg'] = 'white'
+root = Tk()
+root.geometry('100x110+350+70')
+button = Button(root, text = 'Press me', command = Call)
+button.pack()
+
+root.mainloop()
+				</code></pre>
+			</section>
+			
+			<section>
+				<h2>TKinter</h2>
+				<ul class="left-align">
+					<li>More such example on <a href="https://wiki.python.org/moin/Intro%20to%20programming%20with%20Python%20and%20Tkinter">wiki.python.org</a></li>
+				</ul>
+			</section>
+			
+			<section data-background="#F56767" data-background-transition="zoom" data-transition="zoom">
+				<h2>SQLite</h2>
+				<p>Database programming in Python</p>
+			</section>
+			
+			<section>
+				<h2>Using SQLite</h2>
+				<pre><code>
+>>> import sqlite3
+>>> conn = sqlite3.connect('example.db')
+>>> c = conn.cursor()
+				</code></pre>
+			</section>
+
+			<section>
+				<h2>Creating Table</h2>
+				<pre><code>
+>>> c.execute('''CREATE TABLE students
+  (id integer, name text, class text, age integer, weight real)''')
+				</code></pre>
+			</section>
+
+			<section>
+				<h2>Creating Records</h2>
+				<pre><code>
+>>> c.execute('''INSERT INTO students VALUES
+	(1, 'Ramesh Atre', 'BE IT', 21, 65.1)''')
+>>> conn.commit() 	# Save (commit) the changes
+				</code></pre>
+			</section>
+
+			<section>
+				<h2>Closing Connection</h2>
+				<pre><code>
+>>> conn.close()
+				</code></pre>
+			</section>
+
+			<section>
+				<h2>Selecting Records</h2>
+				<pre><code>
+>>> c.execute("SELECT * FROM students")
+>>> print c.fetchone() 		# Fetch One Record
+>>>
+>>> c.execute("SELECT * FROM students")
+>>> print c.fetchall() 		# Fetch All Records
+>>>
+				</code></pre>
+			</section>
+
+			<section>
+				<h2>Selecting Records</h2>
+				<p>with conditions</p>
+				<pre><code>
+>>> id = 1
+>>> c.execute("SELECT * FROM students WHERE id = '%d'" % id)
+>>> print c.fetchall() 		# Fetch All Record
+>>> 
+				</code></pre>
+			</section>
+
+			<section>
+				<h2>Inserting Bulk Records</h2>
+				<pre><code>
+>>> students = [(2, 'Mahesh Shrivastava', 'BE IT', 22, 75.1),
+	(3, 'Jivan Kumble', 'BE IT', 22, 59.0),
+	(4, 'Suresh Pise', 'BE CS', 21, 71.5)]
+>>> c.executemany('INSERT INTO students VALUES (?,?,?,?,?)', students)
+>>> conn.commit()
+>>> 
+>>> c.execute("SELECT * FROM students")
+>>> print c.fetchall() 		# Fetch All Records
+				</code></pre>
+			</section>
+
+			<section>
+				<h2>Sorting & Traversing Records</h2>
+				<pre><code>
+>>> for row in c.execute('SELECT * FROM students ORDER BY age'):
+...         print row
+... 
+(1, u'Ramesh Atre', u'BE IT', 21, 65.1)
+(4, u'Suresh Pise', u'BE CS', 21, 71.5)
+(2, u'Mahesh Shrivastava', u'BE IT', 22, 75.1)
+(3, u'Jivan Kumble', u'BE IT', 22, 59.0)
+				</code></pre>
+			</section>
+
+			<section>
+				<h2>Editing Records</h2>
+				<pre><code>
+>>> c.execute('''UPDATE students SET
+	age = 23 WHERE id = 2''')
+>>> conn.commit() 	# Save (commit) the changes
+>>> 
+>>> c.execute("SELECT * FROM students WHERE id = 2")
+>>> print c.fetchall() 		# Fetch All Record
+				</code></pre>
+			</section>
+
+			<section>
+				<h2>Deleting Records</h2>
+				<pre><code>
+>>> c.execute("DELETE FROM students WHERE id = 3")
+>>> conn.commit()
+>>> 
+>>> c.execute("SELECT * FROM students")
+>>> c.fetchall()
+				</code></pre>
+			</section>
+
+			<section>
+				<h2>SQLite</h2>
+				<ul class="left-align">
+					<li>More such example on <a href="https://docs.python.org/2/library/sqlite3.html">docs.python.org</a></li>
+					<li>SQLite Reference: <a href="http://www.tutorialspoint.com/sqlite/index.htm">tutorialspoint.com</a></li>
+				</ul>
+			</section>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+
+			<section data-background="#F56767" data-background-transition="zoom" data-transition="zoom">
+				<h2>OpenCV (Computer Vision) Programming using Python</h2>
+				<img src="images/opencv-python.png" height="300">
+			</section>
+			
+			<section>
+				<h2>Installation of OpenCV</h2>
+				<ul class="left-align">
+					<li>Linux*</li>
+					<li>Windows</li>
+					<li>Mac OSX</li>
+				</ul>
+			</section>
+			
+			<section>
+				<h2>OpenCV Installation on Linux</h2>
+				<ul class="left-align">
+					<li>Download OpenCV from <a href="http://opencv.org/downloads.html" target="_blank">http://opencv.org/downloads.html</a></li>
+					<li>Details <a href="http://docs.opencv.org/2.4/doc/tutorials/introduction/linux_install/linux_install.html#linux-installation" target="_blank">install documentation</a> here.</li>
+					<li>Requirements: GCC 4.4.x or later, CMake 2.6 or higher, Python 2.6 or later, Git</li>
+				</ul>
+			</section>
+			
+			<section>
+				<h2>Downloading dependancies (Linux)</h2>
+				<pre><code>
+$ sudo apt-get install build-essential
+$ sudo apt-get install cmake git libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev
+$ sudo apt-get install python-dev python-numpy libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev libjasper-dev libdc1394-22-dev
+				</code></pre>
+			</section>
+			
+			<section>
+				<h2>INSTALL START (Linux)</h2>
+				<p>Unzip the donwloaded file.</p>
+				<pre><code>
+$ cd /opencv
+$ mkdir release
+$ cd release
+$ cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local -D BUILD_NEW_PYTHON_SUPPORT=ON -D BUILD_EXAMPLES=ON ..
+				</code></pre>
+				<p>Dont forget <a class="cred">BUILD_NEW_PYTHON_SUPPORT=ON</a></p>
+			</section>
+			
+			<section>
+				<h2>INSTALL FINISHING (Linux)</h2>
+				<pre><code>
+$ make
+$ sudo make install
+$ export PYTHONPATH=/usr/local/lib/python2.7/site-packages/:$PYTHONPATH
+				</code></pre>
+			</section>
+			
+			<section data-background="#F56767" data-background-transition="zoom" data-transition="zoom">
+				<h2>OpenCV Programming</h2>
+			</section>
+			
+			<section>
+				<h2>Opening Image</h2>
+				<pre><code>import cv2 as cv
+
+cv.namedWindow("camera", 1)
+
+img = cv.LoadImage ("test.png")
+
+cv.ShowImage("camera", img)
+cv.WaitKey(0)
+cv.DestroyAllWindows()
+				</code></pre>
+			</section>
+			
+			<section>
+				<h2>Capture Image from Camera</h2>
+				<pre><code>import cv
+import time
+
+capture = cv.CaptureFromCAM(0)
+
+width = 640
+height = 480
+
+cv.SetCaptureProperty(capture,cv.CV_CAP_PROP_FRAME_WIDTH,width)
+cv.SetCaptureProperty(capture,cv.CV_CAP_PROP_FRAME_HEIGHT,height)
+
+if capture:
+    cv.NamedWindow("camera", 1)
+    
+    print "Press any key to start..."
+    cv.WaitKey(0);
+    
+    img = cv.QueryFrame(capture)
+    if not img:
+        print "Frame is NULL"
+    else:
+        cv.ShowImage("camera", img)
+        cv.WaitKey(0)
+else:
+    print "Capture is NULL"
+
+cv.DestroyAllWindows()
+				</code></pre>
+			</section>
+			
+			<section>
+				<h2>Capture Camera Video</h2>
+				<pre><code>import cv
+import time
+
+cv.NamedWindow("camera", 1)
+
+capture = cv.CreateCameraCapture(0)
+#capture = cv.CaptureFromFile("tera.mp4")
+
+width = 160
+height = 120
+
+cv.SetCaptureProperty(capture,cv.CV_CAP_PROP_FRAME_WIDTH,width)
+cv.SetCaptureProperty(capture,cv.CV_CAP_PROP_FRAME_HEIGHT,height)
+
+if capture:
+    while True:
+        img = cv.QueryFrame(capture)
+        cv.ShowImage("camera", img)
+        if cv.WaitKey(10) == 27:
+            break
+else:
+    print "Capture is NULL"
+
+cv.DestroyAllWindows()
+
+				</code></pre>
+			</section>
+			
+			<section>
+				<h2>Face Detection in Camera</h2>
+				<pre><code># The program finds faces in a camera image or video stream and displays a red box around them.
+
+import sys
+import cv2 as cv
+from optparse import OptionParser
+
+min_size = (20, 20)
+image_scale = 2
+haar_scale = 1.2
+min_neighbors = 2
+haar_flags = 0
+
+def Load():
+	return (faceCascade, eyeCascade, mouthCascade)
+
+def detect_and_draw(img, cascade):
+    print "detect_and_draw";
+    # allocate temporary images
+    gray = cv.CreateImage((img.width,img.height), 8, 1)
+    small_img = cv.CreateImage((cv.Round(img.width / image_scale),
+			       cv.Round (img.height / image_scale)), 8, 1)
+
+    # convert color input image to grayscale
+    cv.CvtColor(img, gray, cv.CV_BGR2GRAY)
+
+    # scale input image for faster processing
+    cv.Resize(gray, small_img, cv.CV_INTER_LINEAR)
+    cv.EqualizeHist(small_img, small_img)
+
+    if(cascade):
+        t = cv.GetTickCount()
+        faces = cv.HaarDetectObjects(small_img, cascade, cv.CreateMemStorage(0),
+                                     haar_scale, min_neighbors, haar_flags, min_size)
+        t = cv.GetTickCount() - t
+        print "time taken for detection = %gms" % (t/(cv.GetTickFrequency()*1000.))
+        if faces:
+            for ((x, y, w, h), n) in faces:
+                # the input to cv.HaarDetectObjects was resized, so scale the
+                # bounding box of each face and convert it to two CvPoints
+                pt1 = (int(x * image_scale), int(y * image_scale))
+                pt2 = (int((x + w) * image_scale), int((y + h) * image_scale))
+                cv.Rectangle(img, pt1, pt2, cv.RGB(255, 0, 0), 3, 8, 0)
+
+    cv.ShowImage("video", img)
+
+if __name__ == '__main__':
+
+    parser = OptionParser(usage = "usage: %prog [options] [filename|camera_index] e.g. python TestFaceRec.py --cascade=face.xml 0")
+    parser.add_option("-c", "--cascade", action="store", dest="cascade", type="str", help="Haar cascade file, default %default", default = "haarcascades/haarcascade_frontalface_alt.xml")
+    (options, args) = parser.parse_args()
+
+    cascade = cv.Load(options.cascade)
+
+    if len(args) != 1:
+        parser.print_help()
+        sys.exit(1)
+    
+    #size of the video
+    width = 640
+    height = 480
+
+    input_name = args[0]
+    if input_name.isdigit():
+        capture = cv.CreateCameraCapture(int(input_name))
+        if width is None:
+            width = int(cv.GetCaptureProperty(capture, cv.CV_CAP_PROP_FRAME_WIDTH))
+        else:
+            cv.SetCaptureProperty(capture,cv.CV_CAP_PROP_FRAME_WIDTH,width)
+    
+        if height is None:
+            height = int(cv.GetCaptureProperty(capture, cv.CV_CAP_PROP_FRAME_HEIGHT))
+        else:
+            cv.SetCaptureProperty(capture,cv.CV_CAP_PROP_FRAME_HEIGHT,height)
+    else:
+        capture = None
+
+    cv.NamedWindow("video", 1)
+    
+    if capture:
+        frame_copy = None
+        print "Press any key to start..."
+        cv.WaitKey(0);
+        while True:
+            frame = cv.QueryFrame(capture)
+            if not frame:
+                #print "Error: NULL Frame Captured !!!";
+                continue
+            if not frame_copy:
+                frame_copy = cv.CreateImage((frame.width,frame.height),
+                                            cv.IPL_DEPTH_8U, frame.nChannels)
+
+            if frame.origin == cv.IPL_ORIGIN_TL:
+                cv.Copy(frame, frame_copy)
+            else:
+                cv.Flip(frame, frame_copy, 0)
+
+            detect_and_draw(frame_copy, cascade)
+
+            if cv.WaitKey(10) >= 0:
+                break
+    else:
+        image = cv.LoadImage(input_name, 1)
+        detect_and_draw(image, cascade)
+        cv.WaitKey(0)
+
+    cv.DestroyWindow("video")
+
+				</code></pre>
+			</section>
+			
+			<section>
+				<h2>Face Detection Output</h2>
+				<img src="http://docs.opencv.org/master/face.jpg" alt="Face Detection using OpenCV">
+			</section>
+
+			<section>
+				<h2>References</h2>
+				<ul>
+					<li><a target="_blank" href="https://www.python.org">python.org</a></li>
+					<li><a target="_blank" href="http://opencv.org">opencv.org</a></li>
+				</ul>
+			</section>
+
+			<section style="text-align: left;">
+				<h1>Thank you</h1>
+				<p>
+					- <a target="_blank" href="https://ganeshbhosale.com">Ganesh Bhosale</a> <br>
+					- <a target="_blank" href="http://dwijitsolutions.com">Dwij IT Solutions</a>
+				</p>
+				<p>Did you liked this tutorial ?</p>
+				<p>
+					<div class="fb-like" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
+				</p>
+				<p>Checkout more such tutorials on: <a href="http://dwij.net/tuts">http://dwij.net/tuts</a></p>
+				<!--<div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>-->
+			</section>
+		</div>
+	</div>
+
+	<script src="lib/js/head.min.js"></script>
+	<script src="js/reveal.js"></script>
+
+	<script>
+		// Full list of configuration options available at:
+		// https://github.com/hakimel/reveal.js#configuration
+		Reveal.initialize({
+			slideNumber: 'c/t',
+			controls: true,
+			progress: true,
+			history: true,
+			center: true,
+
+			transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+			// Optional reveal.js plugins
+			dependencies: [
+				{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+				{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+				{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+				{ src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+				{ src: 'plugin/zoom-js/zoom.js', async: true },
+				{ src: 'plugin/notes/notes.js', async: true }
+			]
+		});
+	</script>
+	
+	<div class="share-reveal">
+		<a target="_blank" class="share-reveal-editor" href="http://dwijitsolutions.com">Powered by Dwij IT Solutions</a>
+		<a target="_blank" class="share-reveal-facebook" href="https://www.facebook.com/DwijItSolutions">
+			<svg viewBox="-8 -8 48 48" width="20" height="20" version="1.1" xmlns="http://www.w3.org/2000/svg">
+				<path fill="#666666" d="M25.613-4.557c0,0-3.707,0-6.166,0c-3.662,0-7.732,1.535-7.732,6.835c0.019,1.845,0,3.613,0,5.603H7.481 v6.728h4.366v19.37h8.021V14.48h5.295l0.479-6.618h-5.913c0,0,0.016-2.946,0-3.8c0-2.093,2.184-1.974,2.312-1.974 c1.042,0,3.059,0.003,3.578,0v-6.646H25.613z"/>
+			</svg>
+		</a>
+		<a target="_blank" class="share-reveal-facebook" href="https://twitter.com/gdbhosale">
+			<svg viewBox="0 0 2000 1625.36" width="20" height="20" version="1.1" xmlns="http://www.w3.org/2000/svg">
+				<path fill="#666666" d="m 1999.9999,192.4 c -73.58,32.64 -152.67,54.69 -235.66,64.61 84.7,-50.78 149.77,-131.19 180.41,-227.01 -79.29,47.03 -167.1,81.17 -260.57,99.57 C 1609.3399,49.82 1502.6999,0 1384.6799,0 c -226.6,0 -410.328,183.71 -410.328,410.31 0,32.16 3.628,63.48 10.625,93.51 -341.016,-17.11 -643.368,-180.47 -845.739,-428.72 -35.324,60.6 -55.5583,131.09 -55.5583,206.29 0,142.36 72.4373,267.95 182.5433,341.53 -67.262,-2.13 -130.535,-20.59 -185.8519,-51.32 -0.039,1.71 -0.039,3.42 -0.039,5.16 0,198.803 141.441,364.635 329.145,402.342 -34.426,9.375 -70.676,14.395 -108.098,14.395 -26.441,0 -52.145,-2.578 -77.203,-7.364 52.215,163.008 203.75,281.649 383.304,284.946 -140.429,110.062 -317.351,175.66 -509.5972,175.66 -33.1211,0 -65.7851,-1.949 -97.8828,-5.738 181.586,116.4176 397.27,184.359 628.988,184.359 754.732,0 1167.462,-625.238 1167.462,-1167.47 0,-17.79 -0.41,-35.48 -1.2,-53.08 80.1799,-57.86 149.7399,-130.12 204.7499,-212.41"></path>
+			</svg>
+		</a>
+	</div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-31231580-28', 'auto');
+  ga('send', 'pageview');
+</script>
+</body>
+</html>
