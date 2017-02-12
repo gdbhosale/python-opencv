@@ -135,7 +135,8 @@ $ export PYTHONPATH=/usr/local/lib/python2.7/site-packages/:$PYTHONPATH
 			</section>
 			
 			<section data-background="#F56767" data-background-transition="zoom" data-transition="zoom">
-				<h2>OpenCV Programming</h2>
+				<h2>OpenCV</h2>
+				<h5>Getting Started with Images</h5>
 			</section>
 			
 			<section>
@@ -212,6 +213,46 @@ else:
 cv.DestroyAllWindows()
 
 				</code></pre>
+			</section>
+
+			<section data-background="#F56767" data-background-transition="zoom" data-transition="zoom">
+				<h2>OpenCV</h2>
+				<h5>Core Operations</h5>
+			</section>
+
+			<section>
+				<h2>Basic Operations on Images</h2>
+				<p>Accessing and Modifying pixel values</p>
+				<pre><code>
+>>> import cv2
+>>> import numpy as np
+
+>>> img = cv2.imread('messi5.jpg')
+
+>>> px = img[100,100]
+>>> print px
+[157 166 200]
+
+# accessing only blue pixel
+>>> blue = img[100,100,0]
+>>> print blue
+157
+				</code></pre>
+			</section>
+
+			<section data-background="#F56767" data-background-transition="zoom" data-transition="zoom">
+				<h2>OpenCV</h2>
+				<h5>Image Processing</h5>
+			</section>
+
+			<section data-background="#F56767" data-background-transition="zoom" data-transition="zoom">
+				<h2>OpenCV</h2>
+				<h5>Feature Detection and Description</h5>
+			</section>
+
+			<section data-background="#F56767" data-background-transition="zoom" data-transition="zoom">
+				<h2>Advanced</h2>
+				<h5>Demos with Codes</h5>
 			</section>
 			
 			<section>
