@@ -398,6 +398,8 @@ uint8
                 <h5>Image Processing</h5>
             </section>
 
+            <!--http://docs.opencv.org/3.0-beta/doc/py_tutorials/py_imgproc/py_geometric_transformations/py_geometric_transformations.html#geometric-transformations-->
+
             <section>
                 <h2>Scaling</h2>
                 <pre><code>import cv2
@@ -431,125 +433,97 @@ cv2.waitKey(0)
 cv2.destroyAllWindows()</code></pre>
             </section>
 
+            <!--http://docs.opencv.org/3.0-beta/doc/py_tutorials/py_imgproc/py_thresholding/py_thresholding.html#thresholding-->
+
+            <section>
+                <h2>Thresholding</h2>
+                <ul class="left-align">
+					<li>cv2.THRESH_BINARY</li>
+                    <li>cv2.THRESH_BINARY_INV</li>
+                    <li>cv2.THRESH_TRUNC</li>
+                    <li>cv2.THRESH_TOZERO</li>
+                    <li>cv2.THRESH_TOZERO_INV</li>
+				</ul><br><br>
+                <a href="res/cameraman.jpg" target="_blank">Download - cameraman.jpg</a>
+            </section>
+
+            <section>
+                <h2>Thresholding</h2>
+                <pre><code>import cv2
+import numpy as np
+from matplotlib import pyplot as plt
+
+img = cv2.imread('cameraman.jpg', 0)
+ret,thresh1 = cv2.threshold(img,127,255,cv2.THRESH_BINARY)
+ret,thresh2 = cv2.threshold(img,127,255,cv2.THRESH_BINARY_INV)
+ret,thresh3 = cv2.threshold(img,127,255,cv2.THRESH_TRUNC)
+ret,thresh4 = cv2.threshold(img,127,255,cv2.THRESH_TOZERO)
+ret,thresh5 = cv2.threshold(img,127,255,cv2.THRESH_TOZERO_INV)
+
+titles = ['Original Image','BINARY','BINARY_INV','TRUNC','TOZERO','TOZERO_INV']
+images = [img, thresh1, thresh2, thresh3, thresh4, thresh5]
+
+for i in xrange(6):
+    plt.subplot(2,3,i+1),plt.imshow(images[i],'gray')
+    plt.title(titles[i])
+    plt.xticks([]),plt.yticks([])
+
+plt.show()</code></pre>
+            </section>
+
+            <!--http://docs.opencv.org/3.0-beta/doc/py_tutorials/py_imgproc/py_filtering/py_filtering.html#filtering-->
+
+            <section>
+                <h2>Smoothing</h2>
+                <pre><code>import cv2
+import numpy as np
+from matplotlib import pyplot as plt
+
+img = cv2.imread('lenna.jpg')
+
+kernel = np.ones((5,5),np.float32)/25
+dst = cv2.filter2D(img,-1,kernel)
+
+plt.subplot(121),plt.imshow(img),plt.title('Original')
+plt.xticks([]), plt.yticks([])
+plt.subplot(122),plt.imshow(dst),plt.title('Averaging')
+plt.xticks([]), plt.yticks([])
+plt.show()</code></pre>
+            </section>
+
+
+
+            <!--http://docs.opencv.org/3.0-beta/doc/py_tutorials/py_objdetect/py_face_detection/py_face_detection.html-->
+
             <section data-background="#F56767" data-background-transition="zoom" data-transition="zoom">
                 <h2>OpenCV</h2>
                 <h5>Feature Detection and Description</h5>
             </section>
 
-            <section data-background="#F56767" data-background-transition="zoom" data-transition="zoom">
-                <h2>Advanced</h2>
-                <h5>Demos with Codes</h5>
-            </section>
-            
             <section>
-                <h2>Face Detection in Camera</h2>
-                <pre><code># The program finds faces in a camera image or video stream and displays a red box around them.
+                <h2>Face Detection</h2>
+                <pre><code>
+import numpy as np
+import cv2
 
-import sys
-import cv2 as cv
-from optparse import OptionParser
+face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
+eye_cascade = cv2.CascadeClassifier('haarcascade_eye.xml')
 
-min_size = (20, 20)
-image_scale = 2
-haar_scale = 1.2
-min_neighbors = 2
-haar_flags = 0
+img = cv2.imread('sachin.jpg')
+gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
-def Load():
-    return (faceCascade, eyeCascade, mouthCascade)
+faces = face_cascade.detectMultiScale(gray, 1.3, 5)
+for (x,y,w,h) in faces:
+    cv2.rectangle(img,(x,y),(x+w,y+h),(255,0,0),2)
+    roi_gray = gray[y:y+h, x:x+w]
+    roi_color = img[y:y+h, x:x+w]
+    eyes = eye_cascade.detectMultiScale(roi_gray)
+    for (ex,ey,ew,eh) in eyes:
+        cv2.rectangle(roi_color,(ex,ey),(ex+ew,ey+eh),(0,255,0),2)
 
-def detect_and_draw(img, cascade):
-    print "detect_and_draw";
-    # allocate temporary images
-    gray = cv.CreateImage((img.width,img.height), 8, 1)
-    small_img = cv.CreateImage((cv.Round(img.width / image_scale),
-                   cv.Round (img.height / image_scale)), 8, 1)
-
-    # convert color input image to grayscale
-    cv.CvtColor(img, gray, cv.CV_BGR2GRAY)
-
-    # scale input image for faster processing
-    cv.Resize(gray, small_img, cv.CV_INTER_LINEAR)
-    cv.EqualizeHist(small_img, small_img)
-
-    if(cascade):
-        t = cv.GetTickCount()
-        faces = cv.HaarDetectObjects(small_img, cascade, cv.CreateMemStorage(0),
-                                     haar_scale, min_neighbors, haar_flags, min_size)
-        t = cv.GetTickCount() - t
-        print "time taken for detection = %gms" % (t/(cv.GetTickFrequency()*1000.))
-        if faces:
-            for ((x, y, w, h), n) in faces:
-                # the input to cv.HaarDetectObjects was resized, so scale the
-                # bounding box of each face and convert it to two CvPoints
-                pt1 = (int(x * image_scale), int(y * image_scale))
-                pt2 = (int((x + w) * image_scale), int((y + h) * image_scale))
-                cv.Rectangle(img, pt1, pt2, cv.RGB(255, 0, 0), 3, 8, 0)
-
-    cv.ShowImage("video", img)
-
-if __name__ == '__main__':
-
-    parser = OptionParser(usage = "usage: %prog [options] [filename|camera_index] e.g. python TestFaceRec.py --cascade=face.xml 0")
-    parser.add_option("-c", "--cascade", action="store", dest="cascade", type="str", help="Haar cascade file, default %default", default = "haarcascades/haarcascade_frontalface_alt.xml")
-    (options, args) = parser.parse_args()
-
-    cascade = cv.Load(options.cascade)
-
-    if len(args) != 1:
-        parser.print_help()
-        sys.exit(1)
-    
-    #size of the video
-    width = 640
-    height = 480
-
-    input_name = args[0]
-    if input_name.isdigit():
-        capture = cv.CreateCameraCapture(int(input_name))
-        if width is None:
-            width = int(cv.GetCaptureProperty(capture, cv.CV_CAP_PROP_FRAME_WIDTH))
-        else:
-            cv.SetCaptureProperty(capture,cv.CV_CAP_PROP_FRAME_WIDTH,width)
-    
-        if height is None:
-            height = int(cv.GetCaptureProperty(capture, cv.CV_CAP_PROP_FRAME_HEIGHT))
-        else:
-            cv.SetCaptureProperty(capture,cv.CV_CAP_PROP_FRAME_HEIGHT,height)
-    else:
-        capture = None
-
-    cv.NamedWindow("video", 1)
-    
-    if capture:
-        frame_copy = None
-        print "Press any key to start..."
-        cv.WaitKey(0);
-        while True:
-            frame = cv.QueryFrame(capture)
-            if not frame:
-                #print "Error: NULL Frame Captured !!!";
-                continue
-            if not frame_copy:
-                frame_copy = cv.CreateImage((frame.width,frame.height),
-                                            cv.IPL_DEPTH_8U, frame.nChannels)
-
-            if frame.origin == cv.IPL_ORIGIN_TL:
-                cv.Copy(frame, frame_copy)
-            else:
-                cv.Flip(frame, frame_copy, 0)
-
-            detect_and_draw(frame_copy, cascade)
-
-            if cv.WaitKey(10) >= 0:
-                break
-    else:
-        image = cv.LoadImage(input_name, 1)
-        detect_and_draw(image, cascade)
-        cv.WaitKey(0)
-
-    cv.DestroyWindow("video")
-
+cv2.imshow('img',img)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
                 </code></pre>
             </section>
             
