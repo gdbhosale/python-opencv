@@ -143,8 +143,13 @@ body {
   overflow: auto;
   max-height: 400px;
   word-wrap: normal;
-  background: #3F3F3F;
-  color: #DCDCDC; }
+  /*background: #3F3F3F;
+  color: #DCDCDC;*/
+  background: #000;
+  color: #FFF;
+}
+
+.hljs-string{color: #ffc8c8 !important;}
 
 .reveal table {
   margin: auto;
