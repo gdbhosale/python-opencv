@@ -140,6 +140,7 @@ $ export PYTHONPATH=/usr/local/lib/python2.7/site-packages/:$PYTHONPATH
             <section>
                 <h2>INSTALL (Linux)</h2>
                 <pre><code>
+$ sudo rm -vf /var/lib/apt/lists/*
 $ sudo apt-get update
 $ sudo apt-get install python-dev
 $ sudo apt-get install libopencv-dev python-opencv
@@ -475,8 +476,12 @@ cv2.destroyAllWindows()</code></pre>
 
             <section>
                 <h2 style="text-transform:none">MatPlotLib</h2>
-                <pre><code>sudo apt-get install python-pip
+                <pre><code>
+sudo rm -vf /var/lib/apt/lists/*
+sudo apt-get update
+sudo apt-get install python-pip
 sudo apt-get install python-tk
+sudo apt-get install python-dev
 sudo pip install matplotlib
 </code></pre>
             </section>
