@@ -202,6 +202,9 @@ while(cap.isOpened()):
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
     cv2.imshow('frame',gray)
+
+    time.sleep(0.10) # wait for 100ms
+
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 
@@ -227,6 +230,9 @@ while(True):
 
     # Display the resulting frame
     cv2.imshow('frame',gray)
+
+    time.sleep(0.10) # wait for 100ms
+
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 
@@ -247,10 +253,12 @@ import cv2
 
 img = cv2.imread("messi5.jpg")
 
-# Draw a diagonal blue line with thickness of 5 px
+# Draw a diagonal blue (BGR) line with thickness of 5 px
 cv2.line(img, (0,0), (100,100), (255,0,0), 5)
 
-cv2.imshow('image', img)</code></pre>
+cv2.imshow('image', img)
+cv2.waitKey(0)
+cv2.destroyAllWindows()</code></pre>
             </section>
 
             <section>
@@ -263,7 +271,9 @@ img = cv2.imread("messi5.jpg")
 # Draw a green rectangle from (top left) to (bottom-right) corner
 cv2.rectangle(img, (10,10), (100,100), (0,255,0), 3)
 
-cv2.imshow('image', img)</code></pre>
+cv2.imshow('image', img)
+cv2.waitKey(0)
+cv2.destroyAllWindows()</code></pre>
             </section>
 
             <section>
@@ -276,7 +286,9 @@ img = cv2.imread("messi5.jpg")
 # Draw a circle with center coordinates, radius and color
 cv2.circle(img, (100,63), 63, (0,0,255), -1)
 
-cv2.imshow('image', img)</code></pre>
+cv2.imshow('image', img)
+cv2.waitKey(0)
+cv2.destroyAllWindows()</code></pre>
             </section>
 
             <section>
@@ -290,9 +302,11 @@ font = cv2.FONT_HERSHEY_SIMPLEX
 
 # Text with position from bottom-left corner,
 # Font type, Font Size, color, thickness, lineType
-cv2.putText(img, 'OpenCV', (10,100), font, 4, (255,255,255), 2, cv2.LINE_AA)
+cv2.putText(img, 'OpenCV', (10,60), font, 2, (255,255,255), 2, cv2.CV_AA)
 
-cv2.imshow('image', img)</code></pre>
+cv2.imshow('image', img)
+cv2.waitKey(0)
+cv2.destroyAllWindows()</code></pre>
             </section>
 
             <section data-background="#F56767" data-background-transition="zoom" data-transition="zoom">
